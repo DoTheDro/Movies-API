@@ -1,0 +1,38 @@
+html,
+body {
+    height: 100%;
+}
+
+h2, p, span {
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-con {
+    height: inherit;
+}
+
+.main-con .movie-row {
+    justify-content: center;
+}
+
+.main-con .movie-column {
+    padding: 15px;
+}
+
+img {
+    width: 100%;
+    max-height: 350px;
+    height: 100%;
+}
+
+.main-con h2 {
+    margin: 0.4em 0;
+    text-align: center;
+    font-size: 2.2em;
+}
+
+p {
+    text-align: center;
+    font-size: 1.1em;
+    font-style: italic;
+}
