@@ -1,7 +1,6 @@
 const searchBar = document.querySelector(".searchBar");
 let searchMovieTitle = "";
 const row = document.querySelector(".movie-row");
-const column = document.querySelectorAll(".movie-column");
 
 document.querySelector("form").addEventListener("submit", (e) => {
 
@@ -22,29 +21,40 @@ const renderMovie = (movies) => {
     })
 
     filteredMovies.forEach(movie => {
-        movieResults.push(movie);
-    })
 
-    for (let i = 0; i < movieResults.length; i++) {
         //create element for contents
+        const movieColumn = document.createElement("div");
         const moviePoster = document.createElement("img");
         const movieTitle = document.createElement("h2");
         const movieYear = document.createElement("p");
 
         //assign movie contents
-        movieTitle.textContent = movieResults[i].Title;
-        movieYear.textContent = movieResults[i].Year;
+        movieTitle.textContent = movie.Title;
+        movieYear.textContent = movie.Year;
 
-        moviePoster.setAttribute("src", `${movieResults[i].Poster}`)
+        //setting attributes
+        moviePoster.setAttribute("src", `${movie.Poster}`);
+        movieColumn.setAttribute("class", "col-md-3 movie-column");
 
-        if (column[i].children.length === 3) {
-            column[i].replaceChildren(moviePoster, movieTitle, movieYear);
-        }
+        movieColumn.appendChild(moviePoster);
+        movieColumn.appendChild(movieTitle);
+        movieColumn.appendChild(movieYear);
+        movieResults.push(movieColumn);
+    })
 
-        column[i].appendChild(moviePoster);
-        column[i].appendChild(movieTitle);
-        column[i].appendChild(movieYear);
-        
+    if (row.children.length === 0) {
+
+        movieResults.forEach(result => {
+            row.appendChild(result);
+        })
+
+    } else {
+
+        row.replaceChildren();
+        movieResults.forEach(result => {
+            row.appendChild(result);
+        })
+
     }
 
 }
