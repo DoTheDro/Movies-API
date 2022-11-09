@@ -1,6 +1,12 @@
 const searchBar = document.querySelector(".searchBar");
 let searchMovieTitle = "";
+const APIKey = "9f74012b";
 const row = document.querySelector(".movie-row");
+const pagination = document.querySelector("#pagination");
+const pageNumber = document.querySelector(".pageNumber");
+const prev = document.querySelector(".prev");
+const next = document.querySelector(".next");
+let currentPageNum = 1;
 
 document.querySelector("form").addEventListener("submit", (e) => {
 
@@ -8,11 +14,12 @@ document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
     searchMovieTitle = searchBar.value;
     searchBar.value = "";
-    const API = `http://www.omdbapi.com/?s=${searchMovieTitle}&page=1&apikey=9f74012b`;
-    fetchMovie(API);
+    let queryPage = paginationFunction(currentPageNum);
+    fetchMovie(queryPage);
 })
 
 const renderMovie = (movies) => {
+    pagination.setAttribute("class", "show");
     const movieResults = [];
 
     //only accept movies with poster
@@ -59,7 +66,24 @@ const renderMovie = (movies) => {
 
 }
 
-const fetchMovie = (API) => {
+const paginationFunction = (numOfPage) => {
+
+    prev.addEventListener("click", () => {
+        numOfPage = numOfPage - 1;
+        console.log(numOfPage);
+        return numOfPage;
+    })
+
+    next.addEventListener("click", () => {
+        numOfPage = numOfPage + 1;
+        console.log(numOfPage);
+        return numOfPage;
+    })
+
+}
+
+const fetchMovie = (queryPage) => {
+    const API = `http://www.omdbapi.com/?s=${searchMovieTitle}&page=${queryPage}&apikey=${APIKey}`;
     
     //fetch the URL
     fetch(API).then(res => {

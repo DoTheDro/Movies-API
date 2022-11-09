@@ -3,16 +3,23 @@ body {
     height: 100%;
 }
 
+header {
+    position: absolute;
+    width: 100%;
+}
+
 h2, p, span {
     font-family: 'Poppins', sans-serif;
 }
 
 .main-con {
     height: inherit;
+    padding-top: 5vh;
 }
 
 .main-con .movie-row {
     justify-content: center;
+    padding-bottom: 2em;
 }
 
 .main-con .movie-column {
@@ -35,4 +42,26 @@ p {
     text-align: center;
     font-size: 1.1em;
     font-style: italic;
+}
+
+#pagination {
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+#pagination button {
+    padding: 5px 15px;
+}
+
+div.hide {
+    display: none;
+}
+
+div.show {
+    display: flex;
+}
+
+.pageNumber {
+    margin: 0 .6em;
 }
