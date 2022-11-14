@@ -2,11 +2,24 @@ const searchBar = document.querySelector(".searchBar");
 let searchMovieTitle = "";
 const APIKey = "9f74012b";
 const row = document.querySelector(".movie-row");
-const pagination = document.querySelector("#pagination");
-const pageNumber = document.querySelector(".pageNumber");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
-let currentPageNum = 1;
+const viewMode = document.querySelector("#view-mode");
+
+viewMode.addEventListener("click", () => {
+
+    if (viewMode.getAttribute("class") == "lightMode-toggled") {
+        document.querySelector("header").setAttribute("class", "dark-mode");
+        viewMode.setAttribute("class", "darkMode-toggled");
+        viewMode.textContent = "To Light Mode";
+        document.body.style.backgroundColor = "#000";
+    } else {
+        document.querySelector("header").setAttribute("class", "light-mode");
+        viewMode.setAttribute("class", "lightMode-toggled");
+        viewMode.textContent = "To Dark Mode";
+        document.body.style.backgroundColor = "#FFF";
+    }
+})
 
 document.querySelector("form").addEventListener("submit", (e) => {
 
@@ -14,12 +27,10 @@ document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
     searchMovieTitle = searchBar.value;
     searchBar.value = "";
-    let queryPage = paginationFunction(currentPageNum);
-    fetchMovie(queryPage);
+    fetchMovie();
 })
 
 const renderMovie = (movies) => {
-    pagination.setAttribute("class", "show");
     const movieResults = [];
 
     //only accept movies with poster
@@ -66,24 +77,8 @@ const renderMovie = (movies) => {
 
 }
 
-const paginationFunction = (numOfPage) => {
-
-    prev.addEventListener("click", () => {
-        numOfPage = numOfPage - 1;
-        console.log(numOfPage);
-        return numOfPage;
-    })
-
-    next.addEventListener("click", () => {
-        numOfPage = numOfPage + 1;
-        console.log(numOfPage);
-        return numOfPage;
-    })
-
-}
-
-const fetchMovie = (queryPage) => {
-    const API = `http://www.omdbapi.com/?s=${searchMovieTitle}&page=${queryPage}&apikey=${APIKey}`;
+const fetchMovie = () => {
+    const API = `http://www.omdbapi.com/?s=${searchMovieTitle}&apikey=${APIKey}`;
     
     //fetch the URL
     fetch(API).then(res => {
@@ -95,4 +90,5 @@ const fetchMovie = (queryPage) => {
     }).then(datas => {
         renderMovie(datas.Search);
     })
+
 }

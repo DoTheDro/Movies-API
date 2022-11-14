@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="script.js" defer></script>
 </head>
-<header>
+<header class="light-mode">
+    <button class="lightMode-toggled" id="view-mode">To Dark Mode</button>
     <div class="container header-sec">
         <div class="row header-row">
             <div class="col-md-6 header-logo">
                 <h4>
-                    <a href="#">SampleLogo</a>
+                    <a href="#">Movies API</a>
                 </h4>
             </div>
 
@@ -28,11 +29,6 @@
 <body>
     <div class="container main-con">
         <div class="row movie-row">
-        </div>
-        <div class="hide" id="pagination">
-            <button class="prev">Previous Page</button>
-            <button class="pageNumber">1</button>
-            <button class="next">Next Page</button>
         </div>
     </div>
 </body>
