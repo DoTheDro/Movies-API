@@ -9,16 +9,21 @@
     <script src="script.js" defer></script>
 </head>
 <header class="light-mode">
-    <button class="lightMode-toggled" id="view-mode">To Dark Mode</button>
+    <div class="lightMode-toggled" id="view-mode">
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </div>
     <div class="container header-sec">
         <div class="row header-row">
-            <div class="col-md-6 header-logo">
+            <div class="col-md-6 col-sm-6 header-logo">
                 <h4>
                     <a href="#">Movies API</a>
                 </h4>
             </div>
 
-            <div class="col-md-6 header-searchbar">
+            <div class="col-md-6 col-sm-6 header-searchbar">
                 <form>
                     <input type="search" placeholder="Search Movie" class="searchBar">
                 </form>
@@ -26,7 +31,7 @@
         </div>
     </div>
 </header>
-<body>
+<body class="light-mode">
     <div class="container main-con">
         <div class="row movie-row">
         </div>

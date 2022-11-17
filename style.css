@@ -4,6 +4,70 @@ body {
     transition: 0.3s;
 }
 
+html body {
+    background-color: #F4F4F5;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    --width-of-switch: 3.5em;
+    --height-of-switch: 2em;
+    /* size of sliding icon -- sun and moon */
+    --size-of-icon: 1.4em;
+    /* it is like a inline-padding of switch */
+    --slider-offset: 0.3em;
+    position: relative;
+    width: var(--width-of-switch);
+    height: var(--height-of-switch);
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f4f4f5;
+    transition: .4s;
+    border-radius: 30px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--size-of-icon,1.4em);
+    width: var(--size-of-icon,1.4em);
+    border-radius: 20px;
+    left: var(--slider-offset,0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+    ;
+   transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #303136;
+  }
+  
+  input:checked + .slider:before {
+    left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+    background: #303136;
+    /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+  }
+
+/**/
+
 header {
     position: absolute;
     width: 100%;
@@ -12,12 +76,6 @@ header {
 #view-mode {
     float: right;
     margin: 7px 10px 0 0;
-    border-radius: 20px;
-    padding: 4px 9px;
-    box-shadow: 3px 3px 3px #898989;
-    border: none;
-    max-width: 135px;
-    width: 100%;
 }
 
 #view-mode:hover {
@@ -45,11 +103,6 @@ header {
 
 /* style for light mode */
 
-.lightMode-toggled {
-    background-color: #000;
-    color: #FFF;
-}
-
 .light-mode .header-logo a {
     color: #000;
 }
@@ -68,12 +121,14 @@ header {
     color: #606060;
 }
 
-/* style for dark mode */
-
-.darkMode-toggled {
-    background-color: #FFF;
+.light-mode .main-con h2 {
+    margin: 0.4em 0;
+    text-align: center;
+    font-size: 1.2em;
     color: #000;
 }
+
+/* style for dark mode */
 
 .dark-mode .header-logo a {
     color: #fff;
@@ -99,13 +154,26 @@ header {
     color: #dbdbdb;
 }
 
-h2, p, span {
+.dark-mode .main-con h2 {
+    margin: 0.4em 0;
+    text-align: center;
+    font-size: 1.2em;
+    color: #FFF;
+}
+
+/* neutral mode */
+
+h2, span {
     font-family: 'Poppins', sans-serif;
+}
+
+.header-logo h4 {
+    margin-bottom: 0;
 }
 
 .main-con {
     height: inherit;
-    padding-top: 5vh;
+    padding-top: 12vh;
 }
 
 .main-con .movie-row {
@@ -114,23 +182,68 @@ h2, p, span {
 }
 
 .main-con .movie-column {
-    padding: 15px;
+    padding: 10px 15px;
+    max-width: 20%;
+    text-align: center;
+    min-height: 380px;
 }
 
 img {
     width: 100%;
-    max-height: 350px;
+    max-width: 170px;
+    max-height: 270px;
     height: 100%;
 }
 
-.main-con h2 {
-    margin: 0.4em 0;
-    text-align: center;
-    font-size: 2.2em;
+@media screen and (max-width: 1024px) {
+
+    .header-sec {
+        margin-top: 5vh;
+    }
+
+    .main-con .movie-column {
+        max-width: 25%;
+    }
+
+    img {
+        max-height: 225px;
+    }
+
 }
 
-p {
-    text-align: center;
-    font-size: 1.1em;
-    font-style: italic;
+@media screen and (max-width: 768px) {
+
+    div.header-sec {
+        max-width: 100%;
+    }
+
+    div.main-con {
+        max-width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .main-con .movie-column {
+        max-width: 33.33%;
+    }
+
+}
+
+@media screen and (max-width: 575px) {
+
+    .header-row .header-logo,
+    .header-row .header-searchbar {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    .main-con .movie-column {
+        max-width: 50%;
+    }
+
 }

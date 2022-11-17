@@ -6,18 +6,18 @@ const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const viewMode = document.querySelector("#view-mode");
 
-viewMode.addEventListener("click", () => {
+document.querySelector(".slider").addEventListener("click", () => {
 
     if (viewMode.getAttribute("class") == "lightMode-toggled") {
         document.querySelector("header").setAttribute("class", "dark-mode");
+        document.querySelector("body").setAttribute("class", "dark-mode");
         viewMode.setAttribute("class", "darkMode-toggled");
-        viewMode.textContent = "To Light Mode";
-        document.body.style.backgroundColor = "#000";
+        document.body.style.backgroundColor = "#303136";
     } else {
         document.querySelector("header").setAttribute("class", "light-mode");
+        document.querySelector("body").setAttribute("class", "light-mode");
         viewMode.setAttribute("class", "lightMode-toggled");
-        viewMode.textContent = "To Dark Mode";
-        document.body.style.backgroundColor = "#FFF";
+        document.body.style.backgroundColor = "#F4F4F5";
     }
 })
 
@@ -47,8 +47,7 @@ const renderMovie = (movies) => {
         const movieYear = document.createElement("p");
 
         //assign movie contents
-        movieTitle.textContent = movie.Title;
-        movieYear.textContent = movie.Year;
+        movieTitle.textContent = `${movie.Title} (${movie.Year})`;
 
         //setting attributes
         moviePoster.setAttribute("src", `${movie.Poster}`);
@@ -56,7 +55,6 @@ const renderMovie = (movies) => {
 
         movieColumn.appendChild(moviePoster);
         movieColumn.appendChild(movieTitle);
-        movieColumn.appendChild(movieYear);
         movieResults.push(movieColumn);
     })
 
@@ -77,6 +75,19 @@ const renderMovie = (movies) => {
 
 }
 
+const noFound = () => {
+    const noResultCon = document.createElement("div");
+    const noResultText = document.createElement("h2");
+
+    noResultCon.setAttribute("class", "col-md-12");
+
+    noResultText.textContent = "No Results Found";
+
+    noResultCon.appendChild(noResultText);
+    row.appendChild(noResultCon);
+
+}
+
 const fetchMovie = () => {
     const API = `http://www.omdbapi.com/?s=${searchMovieTitle}&apikey=${APIKey}`;
     
@@ -88,7 +99,11 @@ const fetchMovie = () => {
             console.warn("Failed To Fetch API");
         }
     }).then(datas => {
-        renderMovie(datas.Search);
+        if(datas.Response === "False") {
+            noFound();
+        } else {
+            renderMovie(datas.Search);
+        }
     })
 
 }
